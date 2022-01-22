@@ -26,11 +26,10 @@ export const userSlice = createSlice({
     userFetched: (state, action) => {
       const { details = {} } = action.payload;
       const { name = {}, email = '' } = details;
-      let completeName = `${name?.title}. ${name?.first} ${name?.last}`;
-      state.name = completeName;
+      state.actionLoading = false;
+      state.name = name;
       state.email = email;
-      localStorage.setItem('name', completeName);
-      localStorage.setItem('email', email);
+      localStorage.setItem('userDetails', JSON.stringify(details));
     },
   },
 });

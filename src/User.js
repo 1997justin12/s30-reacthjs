@@ -12,7 +12,7 @@ export const User = () => {
     }),
     shallowEqual
   );
-  const { name = '', email = '' } = currentState;
+  const { name = '', email = '', actionLoading = true } = currentState;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -30,7 +30,11 @@ export const User = () => {
         style={{ backgroundImage: `url(${require('./assets/wallpaper.jpg')})` }}
       >
         <div className="container-details">
-          <Details name={name} email={email} />
+          {!actionLoading ? (
+            <Details name={name} email={email} />
+          ) : (
+            <span>Please wait...</span>
+          )}
         </div>
         <button onClick={handleRefresh} className="btn">
           <BsArrowClockwise size={'1.5em'} />
